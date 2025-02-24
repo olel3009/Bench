@@ -42,7 +42,7 @@ jobs:
             ${{ runner.os }}-node-
 
   build-and-deploy:
-    needs: test
+    needs: install
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
