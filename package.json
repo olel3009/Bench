@@ -22,6 +22,6 @@
     "sequelize": "^6.37.5"
   },
     "prisma": {
-      "schema": "prisma/schema.prisma"
+      "schema": "./prisma/schema.prisma"
     }  
 }
