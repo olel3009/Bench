@@ -20,5 +20,8 @@
     "pg-promise": "^11.10.2",
     "prisma": "^6.4.1",
     "sequelize": "^6.37.5"
-  }
+  },
+    "prisma": {
+      "schema": "prisma/schema.prisma"
+    }  
 }
