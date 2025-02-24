@@ -1,0 +1,30 @@
+image: node:18
+
+services:
+  - name: postgres:15
+    alias: postgres
+
+variables:
+  POSTGRES_DB: orm_test
+  POSTGRES_USER: user
+  POSTGRES_PASSWORD: password
+  DATABASE_URL: "postgresql://user:password@postgres:5432/orm_test"
+
+stages:
+  - install
+  - test
+
+install:
+  stage: install
+  script:
+    - apt-get update && apt-get install -y postgresql-client
+    - npm install
+    - npx prisma generate
+  artifacts:
+    paths:
+      - node_modules/
+
+test:
+  stage: test
+  script:
+    - node index.js
