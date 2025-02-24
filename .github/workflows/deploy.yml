@@ -43,6 +43,13 @@ jobs:
       - name: Deploy to Docker Server
         run: |
           ssh -i server-key.pem -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} << 'EOF'
+            cd /home/${{ secrets.SERVER_USER }}/my-app
+            # Erstelle die .env-Datei mit den nötigen Variablen
+            cat <<EOT > .env
+            VARIABLE1=${{ secrets.VARIABLE1 }}
+            VARIABLE2=${{ secrets.VARIABLE2 }}
+            # Füge hier weitere Variablen hinzu, die deine App benötigt
+          EOT
             docker pull ${{ secrets.DOCKER_USERNAME }}/my-app:latest
             docker stop my-app || true
             docker rm my-app || true
