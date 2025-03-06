@@ -17,4 +17,4 @@ COPY . .
 RUN npx prisma generate
 
 # Starte die Anwendung
-CMD ["node", "index.js"]
+CMD ["node", "sequilize.js"]
