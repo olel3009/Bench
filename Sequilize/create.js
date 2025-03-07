@@ -13,7 +13,7 @@ export let createDuration = new Trend("create_duration");
 
 export function setup() {
     // Erstelle die Datenbank (Tabellen) vor dem Test
-    http.post("http://localhost:3001/api/prisma/db/create", null, {
+    http.post("http://localhost:3001/api/sequilize/db/create", null, {
         tags: { operation: "setup_db" },
     });
 }
@@ -21,7 +21,7 @@ export function setup() {
 export default function () {
     let start = Date.now();
     let res = http.post(
-        "http://localhost:3001/api/prisma/resource",
+        "http://localhost:3001/api/sequilize/resource",
         JSON.stringify({ name: "Test" }),
         {
             headers: { "Content-Type": "application/json" },
@@ -36,7 +36,7 @@ export default function () {
 
 export function teardown() {
     // Teardown: Lösche die Datenbank (Tabellen)
-    http.del("http://localhost:3001/api/prisma/db/drop", null, {
+    http.del("http://localhost:3001/api/sequilize/db/drop", null, {
         tags: { operation: "teardown_db" },
     });
     // Die benutzerdefinierten Metriken werden im Summary automatisch angezeigt.
