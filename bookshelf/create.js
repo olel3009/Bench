@@ -9,14 +9,14 @@ export let totalOps = new Counter("total_operations");
 export let createDuration = new Trend("create_duration");
 
 export function setup() {
-    http.post("http://localhost:3001/api/bookshelf/db/create", null, {
+    http.post("http://localhost:3002/api/bookshelf/db/create", null, {
         tags: { operation: "setup_db" },
     });
 }
 
 export default function () {
     let start = Date.now();
-    let res = http.post("http://localhost:3001/api/bookshelf/resource", JSON.stringify({ name: "Test" }), {
+    let res = http.post("http://localhost:3002/api/bookshelf/resource", JSON.stringify({ name: "Test" }), {
         headers: { "Content-Type": "application/json" },
         tags: { operation: "bookshelf_create" },
     });
@@ -26,7 +26,7 @@ export default function () {
 }
 
 export function teardown() {
-    http.del("http://localhost:3001/api/bookshelf/db/drop", null, {
+    http.del("http://localhost:3002/api/bookshelf/db/drop", null, {
         tags: { operation: "teardown_db" },
     });
 }

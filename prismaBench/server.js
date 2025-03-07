@@ -79,7 +79,7 @@ app.delete('/api/prisma/resource/:id', async (req, res) => {
     }
 });
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3003;
 app.listen(PORT, () => {
     console.log(`Server läuft auf Port ${PORT}`);
 });

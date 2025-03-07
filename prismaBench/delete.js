@@ -7,7 +7,7 @@ export let options = {
 };
 
 export function setup() {
-    http.post("http://localhost:3001/api/prisma/db/create", null, {
+    http.post("http://localhost:3003/api/prisma/db/create", null, {
         tags: { operation: "setup_db" },
     });
     return {}; // Kein persistenter Datensatz erforderlich
@@ -16,7 +16,7 @@ export function setup() {
 export default function () {
     // Erstelle in jeder Iteration einen neuen Datensatz
     let createRes = http.post(
-        "http://localhost:3001/api/prisma/resource",
+        "http://localhost:3003/api/prisma/resource",
         JSON.stringify({ name: "Test" }),
         {
             headers: { "Content-Type": "application/json" },
@@ -27,14 +27,14 @@ export default function () {
     let resourceId = JSON.parse(createRes.body).id;
 
     // Lösche den erstellten Datensatz
-    let delRes = http.del(`http://localhost:3001/api/prisma/resource/${resourceId}`, null, {
+    let delRes = http.del(`http://localhost:3003/api/prisma/resource/${resourceId}`, null, {
         tags: { operation: "delete" },
     });
     check(delRes, { "Delete Status is 200": (r) => r.status === 200 });
 }
 
 export function teardown() {
-    http.del("http://localhost:3001/api/prisma/db/drop", null, {
+    http.del("http://localhost:3003/api/prisma/db/drop", null, {
         tags: { operation: "teardown_db" },
     });
 }

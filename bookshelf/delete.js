@@ -9,7 +9,7 @@ export let deleteDuration = new Trend("delete_duration");
 
 export default function (data) {
     let start = Date.now();
-    let res = http.del(`http://localhost:3001/api/bookshelf/resource/${data.resourceId}`, null, {
+    let res = http.del(`http://localhost:3002/api/bookshelf/resource/${data.resourceId}`, null, {
         tags: { operation: "bookshelf_delete" },
     });
     deleteDuration.add(Date.now() - start);

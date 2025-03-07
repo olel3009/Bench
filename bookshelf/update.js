@@ -8,7 +8,7 @@ export let totalOps = new Counter("total_operations");
 export let updateDuration = new Trend("update_duration");
 
 export function setup() {
-    let res = http.post("http://localhost:3001/api/bookshelf/resource", JSON.stringify({ name: "Test" }), {
+    let res = http.post("http://localhost:3002/api/bookshelf/resource", JSON.stringify({ name: "Test" }), {
         headers: { "Content-Type": "application/json" },
     });
     return { resourceId: JSON.parse(res.body).id };
@@ -16,7 +16,7 @@ export function setup() {
 
 export default function (data) {
     let start = Date.now();
-    let res = http.put(`http://localhost:3001/api/bookshelf/resource/${data.resourceId}`, JSON.stringify({ name: "Updated Test" }), {
+    let res = http.put(`http://localhost:3002/api/bookshelf/resource/${data.resourceId}`, JSON.stringify({ name: "Updated Test" }), {
         headers: { "Content-Type": "application/json" },
         tags: { operation: "bookshelf_update" },
     });

@@ -14,7 +14,7 @@ let testStart = Date.now();
 
 export function setup() {
     // "Erstelle" die DB (Migration erfolgt extern, hier nur Rückmeldung)
-    http.post("http://localhost:3001/api/prisma/db/create", null, {
+    http.post("http://localhost:3003/api/prisma/db/create", null, {
         tags: { operation: "setup_db" },
     });
 }
@@ -22,7 +22,7 @@ export function setup() {
 export default function () {
     let start = Date.now();
     let res = http.post(
-        "http://localhost:3001/api/prisma/resource",
+        "http://localhost:3003/api/prisma/resource",
         JSON.stringify({ name: "Test" }),
         {
             headers: { "Content-Type": "application/json" },
@@ -42,7 +42,7 @@ export function teardown() {
     console.log(`Total operations: ${totalOps}`);
     console.log(`Total test time (s): ${totalTestTimeSec}`);
     console.log(`Operations per second: ${opsPerSec.toFixed(2)}`);
-    http.del("http://localhost:3001/api/prisma/db/drop", null, {
+    http.del("http://localhost:3003/api/prisma/db/drop", null, {
         tags: { operation: "teardown_db" },
     });
 }

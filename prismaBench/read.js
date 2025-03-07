@@ -7,12 +7,12 @@ export let options = {
 };
 
 export function setup() {
-    http.post("http://localhost:3001/api/prisma/db/create", null, {
+    http.post("http://localhost:3003/api/prisma/db/create", null, {
         tags: { operation: "setup_db" },
     });
     // Lege einen Testdatensatz an, der in den Iterationen verwendet wird
     let res = http.post(
-        "http://localhost:3001/api/prisma/resource",
+        "http://localhost:3003/api/prisma/resource",
         JSON.stringify({ name: "Test" }),
         { headers: { "Content-Type": "application/json" } }
     );
@@ -21,14 +21,14 @@ export function setup() {
 }
 
 export default function (data) {
-    let res = http.get(`http://localhost:3001/api/prisma/resource/${data.resourceId}`, {
+    let res = http.get(`http://localhost:3003/api/prisma/resource/${data.resourceId}`, {
         tags: { operation: "read" },
     });
     check(res, { "Status is 200": (r) => r.status === 200 });
 }
 
 export function teardown() {
-    http.del("http://localhost:3001/api/prisma/db/drop", null, {
+    http.del("http://localhost:3003/api/prisma/db/drop", null, {
         tags: { operation: "teardown_db" },
     });
 }

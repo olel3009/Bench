@@ -12,12 +12,12 @@ export let totalOps = new Counter("total_operations");
 export let readDuration = new Trend("read_duration");
 
 export function setup() {
-    http.post("http://localhost:3001/api/rawsql/db/create", null, {
+    http.post("http://localhost:3004/api/rawsql/db/create", null, {
         tags: { operation: "setup_db" },
     });
 
     let res = http.post(
-        "http://localhost:3001/api/rawsql/resource",
+        "http://localhost:3004/api/rawsql/resource",
         JSON.stringify({ name: "Test" }),
         { headers: { "Content-Type": "application/json" } }
     );
@@ -27,7 +27,7 @@ export function setup() {
 
 export default function (data) {
     let start = Date.now();
-    let res = http.get(`http://localhost:3001/api/rawsql/resource/${data.resourceId}`, {
+    let res = http.get(`http://localhost:3004/api/rawsql/resource/${data.resourceId}`, {
         tags: { operation: "rawsql_read" },
     });
     let duration = Date.now() - start;
@@ -37,7 +37,7 @@ export default function (data) {
 }
 
 export function teardown() {
-    http.del("http://localhost:3001/api/rawsql/db/drop", null, {
+    http.del("http://localhost:3004/api/rawsql/db/drop", null, {
         tags: { operation: "teardown_db" },
     });
 }

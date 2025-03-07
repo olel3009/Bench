@@ -12,7 +12,7 @@ export let totalOps = new Counter("total_operations");
 export let createDuration = new Trend("create_duration");
 
 export function setup() {
-    http.post("http://localhost:3001/api/rawsql/db/create", null, {
+    http.post("http://localhost:3004/api/rawsql/db/create", null, {
         tags: { operation: "setup_db" },
     });
 }
@@ -20,7 +20,7 @@ export function setup() {
 export default function () {
     let start = Date.now();
     let res = http.post(
-        "http://localhost:3001/api/rawsql/resource",
+        "http://localhost:3004/api/rawsql/resource",
         JSON.stringify({ name: "Test" }),
         {
             headers: { "Content-Type": "application/json" },
@@ -34,7 +34,7 @@ export default function () {
 }
 
 export function teardown() {
-    http.del("http://localhost:3001/api/rawsql/db/drop", null, {
+    http.del("http://localhost:3004/api/rawsql/db/drop", null, {
         tags: { operation: "teardown_db" },
     });
 }
